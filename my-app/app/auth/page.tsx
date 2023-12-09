@@ -29,7 +29,8 @@ const Auth = (props: Props) => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [email, name, password]);
+
   return (
     <div
       className="relative h-full w-full bg-no-repeat bg-center bg-fixed bg-cover"
@@ -50,14 +51,14 @@ const Auth = (props: Props) => {
               {variant === "register" && (
                 <Input
                   label="Username"
-                  onChange={(e: any) => setEmail(e.target.value)}
+                  onChange={(e: any) => setName(e.target.value)}
                   id="username"
                   value={name}
                 />
               )}
               <Input
                 label="Email"
-                onChange={(e: any) => setName(e.target.value)}
+                onChange={(e: any) => setEmail(e.target.value)}
                 id="email"
                 type="email"
                 value={email}
@@ -70,7 +71,10 @@ const Auth = (props: Props) => {
                 value={password}
               />
             </div>
-            <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition ">
+            <button
+              onClick={register}
+              className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition "
+            >
               {variant === "login" ? "Login" : "Sign Up"}
             </button>
             <p className="text-neutral-500 mt-12">
