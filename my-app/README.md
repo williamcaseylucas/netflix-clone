@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# netflix-clone
 
-## Getting Started
+## sign in with login and register in auth page
 
-First, run the development server:
+- Use 'credentials' because that was defined in our NextAuth page
+- Add pages folder for Nextjs14 and add all api stuff there
+- Also keep file directly as [...nextauth].ts
+- Use useRouter from next/navigation and not next/router
+  - If you try to use a redirect in a try catch, it will not work because it internally throws errors
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Commands to run
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- npx create-next-app --typescript (or yarn create next-app --typescript)
+- yarn add prisma -D
+- yarn add @prisma/client
+- yarn add next-auth
+- yarn add bcrypt
+- yarn add -D @types/bcrypt
+- yarn add axios
+- yarn add react-icons
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Prisma
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- yarn prisma init
+- add lib folder to main directory
+  - add prismadb.ts
+  - outside of lib, add global.d.ts to make prismadb error go away
+- go to .env file to see url to database
+- add models
+- add /test at the end of uri string
+- yarn prisma db push (updates database)
+  - Go to collections and you can schemas that have been generated
+- add NEXT_AUTH secrets to .env file
 
-## Learn More
+## MongoDB
 
-To learn more about Next.js, take a look at the following resources:
+- Connect with code to get link that won't break Prisma
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## In globals.css
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Add @layer base {} and other values to apply tailwind css to components without having to manually type them everywhere
 
-## Deploy on Vercel
+## Scale background image
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- bg-no-repeat bg-center bg-fixed bg-cover
+- Add to style component of relative: "url('/images/hero.jpg')"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Can reference files in public folder
+
+- By /images
+
+## Input.tsx
+
+- peer-placeholder-shown -> what it shows on the peer element
+- peer-focus -> what it shows on it its own element
+
+## General notes
+
+- Just change height of image to scale

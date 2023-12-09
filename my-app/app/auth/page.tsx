@@ -4,19 +4,41 @@ import Input from "@/components/Input";
 import React, { useCallback, useState } from "react";
 import axios from "axios";
 
-type Props = {};
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-const Auth = (props: Props) => {
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+
+const Auth = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [variant, setVariant] = useState("login");
+
+  const router = useRouter();
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
       currentVariant === "login" ? "register" : "login"
     );
   }, []);
+
+  const login = useCallback(async () => {
+    try {
+      // Passes email and password into Credentials object
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: "/",
+      });
+
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, password, router]);
 
   // for axios call
   const register = useCallback(async () => {
@@ -26,10 +48,12 @@ const Auth = (props: Props) => {
         name,
         password,
       });
+
+      login();
     } catch (error) {
       console.log(error);
     }
-  }, [email, name, password]);
+  }, [email, name, password, login]);
 
   return (
     <div
@@ -72,11 +96,19 @@ const Auth = (props: Props) => {
               />
             </div>
             <button
-              onClick={register}
+              onClick={variant === "login" ? login : register}
               className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition "
             >
               {variant === "login" ? "Login" : "Sign Up"}
             </button>
+            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80">
+                <FcGoogle size={30} />
+              </div>
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80">
+                <FaGithub size={30} />
+              </div>
+            </div>
             <p className="text-neutral-500 mt-12">
               {variant === "login"
                 ? "First time using Netflix?"
