@@ -7,6 +7,14 @@
 - Also keep file directly as [...nextauth].ts
 - Use useRouter from next/navigation and not next/router
   - If you try to use a redirect in a try catch, it will not work because it internally throws errors
+- google developer console for google auth
+  - Go to oath constent screen and create external app
+  - Credentials, oath client id
+
+## Check if user is signed in
+
+- Create serverAuth in lib folder and pass request in from NextApiRequest and check if the email exists in the session, then check the db with prisma, then return current user if it exists
+  - Allows us to validate login without having to rewrite code all the time
 
 ## Commands to run
 
@@ -18,6 +26,7 @@
 - yarn add -D @types/bcrypt
 - yarn add axios
 - yarn add react-icons
+- yarn add @next-auth/prisma-adapter
 
 ## Prisma
 

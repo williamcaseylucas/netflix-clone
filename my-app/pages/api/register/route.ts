@@ -1,13 +1,13 @@
 import bcrypt from "bcrypt";
-import { NextApiRequest, NextApiResponse } from "next";
 import prismadb from "@/lib/prismadb";
 
+import { NextApiResponse, NextApiRequest } from "next";
 import { NextResponse, NextRequest } from "next/server";
 
 // For /register route POST
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { email, name, password } = await req.json();
+    const { email, name, password } = req.body;
 
     // email:email = email
     const existingUser = await prismadb.user.findUnique({
