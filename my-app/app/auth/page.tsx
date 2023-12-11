@@ -1,7 +1,7 @@
 "use client";
 
 import Input from "@/components/Input";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 import { signIn } from "next-auth/react";
@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { sign } from "crypto";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -44,13 +43,15 @@ const Auth = () => {
   // for axios call
   const register = useCallback(async () => {
     try {
-      await axios.post("/api/register", {
+      const status = await axios.post("/api/register", {
         email,
         name,
         password,
       });
 
-      login();
+      console.log("status", status);
+
+      // login();
     } catch (error) {
       console.log(error);
     }

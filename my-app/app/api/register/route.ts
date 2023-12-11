@@ -5,9 +5,9 @@ import { NextApiResponse, NextApiRequest } from "next";
 import { NextResponse, NextRequest } from "next/server";
 
 // For /register route POST
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
   try {
-    const { email, name, password } = req.body;
+    const { email, name, password } = await req.json();
 
     // email:email = email
     const existingUser = await prismadb.user.findUnique({
@@ -40,6 +40,6 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-// export async function GET() {
-//   return NextResponse.json({ message: "Hello -- GET" });
-// }
+export async function GET() {
+  return NextResponse.json({ message: "Hello -- GET" });
+}

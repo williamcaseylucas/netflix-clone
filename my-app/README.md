@@ -1,5 +1,11 @@
 # netflix-clone
 
+## Connection to checking if user is signed in
+
+- In /hooks we have a useCurrentUser that grabs -> api/current which grabs serverAuth.ts that checks the db
+- Create lib component fetcher to grab url from axios
+- serverAuth in lib is
+
 ## sign in with login and register in auth page
 
 - Use 'credentials' because that was defined in our NextAuth page
@@ -10,6 +16,10 @@
 - google developer console for google auth
   - Go to oath constent screen and create external app
   - Credentials, oath client id
+
+## Generate key
+
+- openssl rand -base64 32
 
 ## Check if user is signed in
 
